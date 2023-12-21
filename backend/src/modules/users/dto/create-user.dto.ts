@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { hashSync } from 'bcryptjs';
-import { Transform } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   IsBoolean,
   IsEmail,
@@ -8,7 +8,10 @@ import {
   IsString,
   MaxLength,
   MinLength,
+  ValidateNested,
 } from 'class-validator';
+import { Address } from 'cluster';
+import { CreateAddressDto } from 'src/modules/address/dto/create-address.dto';
 
 export class CreateUserDto {
   @ApiProperty()
@@ -41,4 +44,10 @@ export class CreateUserDto {
     groups: ['transform'],
   })
   password: string;
+
+  @ApiProperty({ type: CreateAddressDto })
+  @IsNotEmpty()
+  @ValidateNested()
+  @Type(() => CreateAddressDto)
+  address: Address;
 }
