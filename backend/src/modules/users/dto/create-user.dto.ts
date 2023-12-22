@@ -32,7 +32,7 @@ export class CreateUserDto {
   @MaxLength(120)
   fullName: string;
 
-  @ApiProperty()
+  @ApiProperty({ default: false })
   @IsBoolean()
   admin: boolean = false;
 
