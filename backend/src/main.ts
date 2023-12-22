@@ -28,6 +28,8 @@ async function bootstrap() {
 
   SwaggerModule.setup('docs', app, document);
 
+  app.enableShutdownHooks();
+
   await app.listen(3001);
 }
 bootstrap();
