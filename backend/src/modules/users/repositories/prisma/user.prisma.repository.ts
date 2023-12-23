@@ -61,7 +61,7 @@ export class UserPrismaRepository implements UserRepository {
             }
         })
         
-        return user
+        return plainToInstance(User, user)
     }
 
     async findAll(): Promise<User[]> {
