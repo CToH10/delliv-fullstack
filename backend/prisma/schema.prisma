@@ -13,7 +13,7 @@ enum orderStatus {
   delivered
 }
 
-model user {
+model users {
   id String @id @default(uuid()) @db.Uuid
   username String @db.VarChar(120) @unique
   fullName String @db.VarChar(120)
@@ -21,13 +21,13 @@ model user {
   password String @db.VarChar(120)
   admin Boolean? @default(false)
   orders orders[]
-  address Address?
+  address address?
 }
 
 
 model orders {
   id String @id @default(uuid()) @db.Uuid
-  user user @relation(fields: [username], references: [username], onDelete: Cascade)
+  user users @relation(fields: [username], references: [username], onDelete: Cascade)
   username String
   address   String @db.VarChar(263)
   createdAt DateTime @default(now())
@@ -35,14 +35,14 @@ model orders {
   status orderStatus @default(sorting)
 }
 
-model Address {
+model address {
   id         String @id @default(uuid()) @db.Uuid
   cep        String @db.VarChar(9)
   state      String @db.VarChar(19)
   city       String @db.VarChar(30)
   street     String @db.VarChar(50)
   number     String @db.VarChar(30)
-  complement String @db.VarChar(120)
-  user       user  @relation(fields: [username], references: [username], onDelete: Cascade)
+  complement String? @db.VarChar(120)
+  user       users  @relation(fields: [username], references: [username], onDelete: Cascade)
   username    String @unique
 }

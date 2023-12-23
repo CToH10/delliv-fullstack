@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class CreateAddressDto {
   @ApiProperty()
@@ -34,6 +34,7 @@ export class CreateAddressDto {
 
   @ApiPropertyOptional()
   @IsString()
+  @IsOptional()
   @MaxLength(120)
   complement: string;
 }

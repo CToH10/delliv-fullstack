@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { address } from '@prisma/client';
 import { hashSync } from 'bcryptjs';
 import { Transform, Type } from 'class-transformer';
 import {
@@ -10,7 +11,6 @@ import {
   MinLength,
   ValidateNested,
 } from 'class-validator';
-import { Address } from 'cluster';
 import { CreateAddressDto } from 'src/modules/address/dto/create-address.dto';
 
 export class CreateUserDto {
@@ -49,5 +49,5 @@ export class CreateUserDto {
   @IsNotEmpty()
   @ValidateNested()
   @Type(() => CreateAddressDto)
-  address: Address;
+  address: address;
 }
