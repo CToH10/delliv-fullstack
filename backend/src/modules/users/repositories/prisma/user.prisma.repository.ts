@@ -53,16 +53,18 @@ export class UserPrismaRepository implements UserRepository {
     }
 
     async findUnique(identifier: string) : Promise<User>{
-        const user = this.prisma.users.findFirst({
+        const user = await this.prisma.users.findFirst({
             where: {
                 OR:[
                      {email: identifier},
                      {username: identifier}
                 ]
+            }, include: {
+                address: true
             }
         })
         
-        return plainToInstance(User, user)
+        return user
     }
 
     async findAll(): Promise<User[]> {
