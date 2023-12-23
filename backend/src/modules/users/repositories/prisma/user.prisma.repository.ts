@@ -5,6 +5,7 @@ import { CreateUserDto } from "../../dto/create-user.dto";
 import { User } from "../../entities/user.entity";
 import { Address } from "src/modules/address/entities/address.entity";
 import { plainToInstance } from "class-transformer";
+import { UpdateUserDto } from "../../dto/update-user.dto";
 
 @Injectable()
 export class UserPrismaRepository implements UserRepository {
@@ -51,7 +52,7 @@ export class UserPrismaRepository implements UserRepository {
           return plainToInstance(User, newUser)
     }
 
-    async findUnique(identifier: string) {
+    async findUnique(identifier: string) : Promise<User>{
         const user = this.prisma.users.findFirst({
             where: {
                 OR:[
@@ -76,4 +77,18 @@ export class UserPrismaRepository implements UserRepository {
         return plainToInstance(User, user)
     }
 
+    async update(id: string, data: UpdateUserDto): Promise<User> {
+        const {admin, ...rest} = data
+        const user = await this.prisma.users.update({
+          where: { id },
+          data: { ...rest },
+        });
+        return plainToInstance(User, user);
+    }
+
+    async delete(id: string): Promise<void> {
+        await this.prisma.users.delete({
+          where: { id },
+        });
+    }
 }

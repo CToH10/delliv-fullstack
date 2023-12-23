@@ -32,11 +32,20 @@ export class UsersService {
     return found;
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    const found = await this.userRepository.findOne(id);
+    if (!found) {
+      throw new NotFoundException('Usuário não encontrado')
+    };
+
+    return this.userRepository.update(id, updateUserDto)
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    const found = await this.userRepository.findOne(id);
+    if (!found) {
+      throw new NotFoundException('Usuário não encontrado')
+    }
+    return this.userRepository.delete(id);
   }
 }
