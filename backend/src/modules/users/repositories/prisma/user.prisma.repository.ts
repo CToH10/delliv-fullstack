@@ -35,17 +35,7 @@ export class UserPrismaRepository implements UserRepository {
               },
             },
             include: {
-              address: {
-                select: {
-                  id: true,
-                  cep: true,
-                  state: true,
-                  city: true,
-                  street: true,
-                  number: true,
-                  complement: true,
-                },
-              },
+              address: true
             },
           });
 
