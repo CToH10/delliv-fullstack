@@ -5,6 +5,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 interface iPayload {
   sub: string;
   identifier: string;
+  admin: boolean
 }
 
 @Injectable()
@@ -18,6 +19,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: iPayload) {
-    return { id: payload.sub, identifier: payload.identifier };
+    return { id: payload.sub, identifier: payload.identifier, admin: payload.admin };
   }
 }
