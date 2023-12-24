@@ -26,7 +26,7 @@ export class AuthService {
   async login(identifier: string) {
     const user = await this.useService.findUnique(identifier);
     return {
-      token: this.jwtService.sign({ identifier }, { subject: user.id }),
+      token: this.jwtService.sign({ identifier , admin: user.admin}, { subject: user.id }),
     };
   }
 }
