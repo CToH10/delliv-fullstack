@@ -29,7 +29,7 @@ export class AddressPrismaRepository implements AddressRepository {
 
         return plainToInstance(Address, address)
     }
-    async update( username: string, data: UpdateAddressDto): Promise<Address> {
+    async update(username: string, data: UpdateAddressDto): Promise<Address> {
 
         const updatedAddress = await this.prisma.address.update({where:{
             username
