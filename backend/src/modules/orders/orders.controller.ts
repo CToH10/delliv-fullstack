@@ -13,7 +13,7 @@ export interface RequestUser {
   id: string;
 }
 
-@ApiTags('orders')
+@ApiTags('Orders')
 @Controller('orders')
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
