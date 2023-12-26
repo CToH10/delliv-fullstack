@@ -11,22 +11,19 @@ import { plainToInstance } from "class-transformer";
 export class OrderPrismaRepository implements OrderRepository{
     constructor(private prisma: PrismaService){}
     async create(data: CreateOrderDto, user: RequestUser): Promise<Order> {
-        const userOrderer = await this.prisma.users.findUnique({where: {id: user.id}, include: {address: {select: {
-            street: true,
-            number: true,
-            city: true,
-            state: true,
-            cep: true,
-            complement: true,
-        }}}})
+        const userOrderer = await this.prisma.users.findUnique({where: {id: user.id}, include: {address: true}})
 
         const addressValues = Object.values(userOrderer.address).join(", ")
 
         const productToAdd = await this.prisma.products.findUnique({where: {id: data.product_id}})
 
         if (productToAdd.stock < data.quantity) {
-            throw new HttpException('Produto em falta', 400)
+            throw new HttpException('Produto indisponível nessa quantidade', 400)
         }
+
+        await this.prisma.products.update({where: {id: productToAdd.id}, data: {
+            stock: productToAdd.stock - data.quantity
+        }})
 
         const newOrder = await this.prisma.orders.create({data: {
             ...data,
@@ -37,27 +34,65 @@ export class OrderPrismaRepository implements OrderRepository{
             product: true
         }})
 
-        await this.prisma.products.update({where: {id: productToAdd.id}, data: {
-            stock: productToAdd.stock - data.quantity
-        }})
-
         return plainToInstance(Order, newOrder)
     }
 
     async findAll(): Promise<Order[]> {
-        throw new Error("Method not implemented.");
+        const allOrders = await this.prisma.orders.findMany()
+
+        return plainToInstance(Order, allOrders);
     }
 
     async findOne(id: string): Promise<Order> {
-        throw new Error("Method not implemented.");
+        const order = await this.prisma.orders.findUnique({where:{id}})
+
+        if (!order) {
+            throw new HttpException('Pedido não encontrado', 404)
+        }
+
+        return plainToInstance(Order, order)
     }
 
     async update(id: string, data: UpdateOrderDto): Promise<Order> {
-        throw new Error("Method not implemented.");
-    }
+        const order = await this.prisma.orders.findUnique({where:{id}})
+
+        if (!order) {
+            throw new HttpException('Pedido não encontrado', 404)
+        }
+
+        const product = await this.prisma.products.findUnique({where: {id: order.product_id}})
+
+        if (product.stock < data.quantity) {
+            throw new HttpException('Produto indisponível nessa quantidade', 400)
+        }
+        
+        if (data.quantity === 0) {
+            await this.prisma.orders.delete({where: {id}})
+
+            return {'message': 'Produto excluído com sucesso'}
+        }
+
+        const changeStock = order.quantity - data.quantity
+
+        await this.prisma.products.update({where: {id: order.product_id}, data: {
+            stock: product.stock + changeStock
+        }})
+
+        const updatedOrder = await this.prisma.orders.update({where: {id}, data:{
+            quantity: data.quantity
+        }, include: {
+            product: true
+        }})
+
+        return plainToInstance(Order, updatedOrder)
+    }   
 
     async updateStatus(id: string): Promise<Order> {
         const order = await this.prisma.orders.findUnique({where: {id}})
+
+        if (!order) {
+            throw new HttpException('Pedido não encontrado', 404)
+        }
 
         let newStatus: 'delivered' | 'shipping'
 
@@ -81,6 +116,13 @@ export class OrderPrismaRepository implements OrderRepository{
     }
 
     async delete(id: string): Promise<void> {
+
+        const order = await this.prisma.orders.findUnique({where: {id}})
+
+        if (!order) {
+            throw new HttpException('Pedido não encontrado', 404)
+        }
+        
         await this.prisma.orders.delete({where: {id}})
     }
     

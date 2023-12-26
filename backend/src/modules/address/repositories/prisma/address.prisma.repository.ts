@@ -23,6 +23,12 @@ export class AddressPrismaRepository implements AddressRepository {
         return plainToInstance(Address, newAddress)
     }
 
+    async findAll(): Promise<Address[]> {
+        const addresses = await this.prisma.address.findMany()
+
+        return plainToInstance(Address, addresses)
+    }
+
     async findOne(id: string): Promise<Address> {
         const address = await this.prisma.address.
         findUnique({where: {id}})

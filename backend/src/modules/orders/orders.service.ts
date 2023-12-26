@@ -12,15 +12,15 @@ export class OrdersService {
   }
 
   findAll() {
-    return `This action returns all orders`;
+    return this.orderRepository.findAll();
   }
 
   findOne(id: string) {
-    return `This action returns a #${id} order`;
+    return this.orderRepository.findOne(id);
   }
 
   update(id: string, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
+    return this.orderRepository.update(id, updateOrderDto);
   }
 
   updateStatus(id:string) {

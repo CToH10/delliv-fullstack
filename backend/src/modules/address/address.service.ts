@@ -11,7 +11,7 @@ export class AddressService {
   }
 
   findAll() {
-    return `This function is not yet implemented`;
+    return this.addressRepository.findAll();
   }
 
   findOne(id: string) {
