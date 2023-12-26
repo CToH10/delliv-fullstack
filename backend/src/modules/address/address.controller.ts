@@ -13,9 +13,9 @@ export class AddressController {
 
   @ApiBearerAuth()
   @UseGuards(JWTAuthGuard)
-  @Post(':username')
-  create(@Body() createAddressDto: CreateAddressDto, @Param('username') username: string) {
-    return this.addressService.create(createAddressDto, username);
+  @Post(':id')
+  create(@Body() createAddressDto: CreateAddressDto, @Param('id') id: string) {
+    return this.addressService.create(createAddressDto, id);
   }
 
   @UseGuards(JWTAuthGuard, AdminGuard)

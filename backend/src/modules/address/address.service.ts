@@ -6,8 +6,8 @@ import { AddressRepository } from './repositories/address.repository';
 @Injectable()
 export class AddressService {
   constructor(private addressRepository: AddressRepository){}
-  create(createAddressDto: CreateAddressDto, username: string) {
-    return this.addressRepository.create(createAddressDto, username);
+  create(createAddressDto: CreateAddressDto, id: string) {
+    return this.addressRepository.create(createAddressDto, id);
   }
 
   findAll() {

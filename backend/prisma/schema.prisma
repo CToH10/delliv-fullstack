@@ -46,8 +46,8 @@ model Address {
   street     String  @db.VarChar(50)
   number     String  @db.VarChar(30)
   complement String? @db.VarChar(120)
-  user       Users   @relation(fields: [username], references: [username], onDelete: Cascade)
-  username   String  @unique
+  user       Users   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id    String  @db.Uuid @unique
 }
 
 model Products {
