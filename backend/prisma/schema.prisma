@@ -7,36 +7,38 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum orderStatus {
+enum OrderStatus {
   sorting
   shipping
   delivered
 }
 
-model users {
+model Users {
   id       String   @id @default(uuid()) @db.Uuid
   username String   @unique @db.VarChar(120)
   fullName String   @db.VarChar(120)
   email    String   @unique @db.VarChar(120)
   password String   @db.VarChar(120)
   admin    Boolean? @default(false)
-  orders   orders[]
-  address  address?
+  orders   Orders[]
+  address  Address?
 }
 
-model orders {
-  id             String           @id @default(uuid()) @db.Uuid
-  user           users            @relation(fields: [username], references: [username], onDelete: Cascade)
-  username       String
-  address        String           @db.VarChar(263)
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime
-  status         orderStatus      @default(sorting)
-  productsOrders productsOrders[]
-  priceTotal     Int              @db.Integer()
+model Orders {
+  id         String      @id @default(uuid()) @db.Uuid
+  user       Users       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id    String      @db.Uuid
+  address    String      @db.VarChar(263)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  status     OrderStatus @default(sorting)
+  priceTotal Int         @db.Integer()
+  product    Products    @relation(fields: [product_id], references: [id], onDelete: Restrict)
+  product_id String      @default(uuid()) @db.Uuid
+  quantity   Int         @db.Integer()
 }
 
-model address {
+model Address {
   id         String  @id @default(uuid()) @db.Uuid
   cep        String  @db.VarChar(9)
   state      String  @db.VarChar(19)
@@ -44,24 +46,14 @@ model address {
   street     String  @db.VarChar(50)
   number     String  @db.VarChar(30)
   complement String? @db.VarChar(120)
-  user       users   @relation(fields: [username], references: [username], onDelete: Cascade)
+  user       Users   @relation(fields: [username], references: [username], onDelete: Cascade)
   username   String  @unique
 }
 
-model products {
-  id             String           @id @default(uuid()) @db.Uuid
-  name           String           @db.VarChar(50)
-  stock          Int              @db.Integer()
-  price          Int              @db.Integer()
-  productsOrders productsOrders[]
-}
-
-model productsOrders {
-  id        String   @id @default(uuid()) @db.Uuid
-  product   products @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId String   @db.Uuid()
-  order     orders   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  orderId   String   @db.Uuid()
-  quantity  Int
-  price     Int
+model Products {
+  id     String   @id @default(uuid()) @db.Uuid
+  name   String   @db.VarChar(50)
+  stock  Int      @db.Integer()
+  price  Int      @db.Integer()
+  orders Orders[]
 }

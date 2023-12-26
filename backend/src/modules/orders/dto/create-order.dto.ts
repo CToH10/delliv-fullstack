@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsUUID } from 'class-validator';
 
 export enum OrderStatus {
   sorting = 'sorting',
@@ -9,13 +9,12 @@ export enum OrderStatus {
 
 export class CreateOrderDto {
   @ApiProperty()
-  @IsString()
+  @IsUUID()
   @IsNotEmpty()
-  address: string;
+  product_id: string;
 
-  @ApiProperty({
-    enum: ['sorting', 'shipping', 'delivered'],
-    default: 'sorting',
-  })
-  status: OrderStatus;
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  quantity: number
 }

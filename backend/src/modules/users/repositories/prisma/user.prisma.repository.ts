@@ -27,6 +27,7 @@ export class UserPrismaRepository implements UserRepository {
         const newAddress = new Address()
         Object.assign(newAddress, address)
 
+        
         const newUser = await this.prisma.users.create({
             data: {
               ...rest,

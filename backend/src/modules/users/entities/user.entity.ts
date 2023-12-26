@@ -1,4 +1,4 @@
-import { address } from "@prisma/client";
+import { Address } from "@prisma/client";
 import { Exclude } from "class-transformer";
 import { randomUUID } from "crypto";
 
@@ -8,7 +8,7 @@ export class User {
     email: string;
     fullName: string;
     admin: boolean;
-    address: address;
+    address: Address;
     
     @Exclude()
     password: string;

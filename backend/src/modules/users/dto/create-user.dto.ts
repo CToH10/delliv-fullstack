@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { address } from '@prisma/client';
+import { Address } from '@prisma/client';
 import { hashSync } from 'bcryptjs';
 import { Transform, Type } from 'class-transformer';
 import {
@@ -49,5 +49,5 @@ export class CreateUserDto {
   @IsNotEmpty()
   @ValidateNested()
   @Type(() => CreateAddressDto)
-  address: address;
+  address: Address;
 }
