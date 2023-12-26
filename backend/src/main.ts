@@ -26,6 +26,7 @@ async function bootstrap() {
       'Delivery services API developed for full stack technical test',
     )
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, nestConfig);

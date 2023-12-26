@@ -4,6 +4,7 @@ import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JWTAuthGuard } from 'src/auth/jwt.auth.guard';
+import { AdminGuard } from 'src/auth/admin.auth.guard';
 
 @ApiTags('Address')
 @Controller('address')
@@ -12,12 +13,12 @@ export class AddressController {
 
   @ApiBearerAuth()
   @UseGuards(JWTAuthGuard)
-  @Post(':username')
-  create(@Body() createAddressDto: CreateAddressDto, @Param('username') username: string) {
-    return this.addressService.create(createAddressDto, username);
+  @Post(':id')
+  create(@Body() createAddressDto: CreateAddressDto, @Param('id') id: string) {
+    return this.addressService.create(createAddressDto, id);
   }
 
-  @HttpCode(404)
+  @UseGuards(JWTAuthGuard, AdminGuard)
   @Get()
   findAll() {
     return this.addressService.findAll();
@@ -40,6 +41,7 @@ export class AddressController {
 
   @ApiBearerAuth()
   @UseGuards(JWTAuthGuard)
+  @HttpCode(204)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.addressService.remove(id);
