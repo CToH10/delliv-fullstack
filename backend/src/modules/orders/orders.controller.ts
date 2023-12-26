@@ -26,7 +26,9 @@ export class OrdersController {
     return this.ordersService.create(createOrderDto, user);
   }
 
-  @Get()
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(JWTAuthGuard, AdminGuard)
+  @Get() 
   findAll() {
     return this.ordersService.findAll();
   }
@@ -39,14 +41,18 @@ export class OrdersController {
     return this.ordersService.findByUser(user.id);
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(JWTAuthGuard)
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.ordersService.findOne(id);
+  findOne(@Param('id') id: string, @CurrentUser() user: RequestUser) {
+    return this.ordersService.findOne(id, user);
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(JWTAuthGuard)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
-    return this.ordersService.update(id, updateOrderDto);
+  update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto, @CurrentUser() user: RequestUser) {
+    return this.ordersService.update(id, updateOrderDto, user);
   }
 
   @ApiBearerAuth()
@@ -56,9 +62,11 @@ export class OrdersController {
     return this.ordersService.updateStatus(id)
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(JWTAuthGuard)
   @HttpCode(204)
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.ordersService.remove(id);
+  remove(@Param('id') id: string, @CurrentUser() user:RequestUser) {
+    return this.ordersService.remove(id, user);
   }
 }

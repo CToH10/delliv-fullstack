@@ -10,6 +10,13 @@ import { plainToInstance } from "class-transformer";
 @Injectable()
 export class OrderPrismaRepository implements OrderRepository{
     constructor(private prisma: PrismaService){}
+
+    isAllowed(reqUser, ownerUser) {
+        if (reqUser.id !== ownerUser || !reqUser.admin) {
+            throw new HttpException("Ação não permitida", 401)
+        }
+    }
+
     async create(data: CreateOrderDto, user: RequestUser): Promise<Order> {
         const userOrderer = await this.prisma.users.findUnique({where: {id: user.id}, include: {address: true}})
 
@@ -43,12 +50,14 @@ export class OrderPrismaRepository implements OrderRepository{
         return plainToInstance(Order, allOrders);
     }
 
-    async findOne(id: string): Promise<Order> {
+    async findOne(id: string, user: RequestUser): Promise<Order> {
         const order = await this.prisma.orders.findUnique({where:{id}})
 
         if (!order) {
             throw new HttpException('Pedido não encontrado', 404)
         }
+
+        this.isAllowed(user, order.user_id)
 
         return plainToInstance(Order, order)
     }
@@ -65,12 +74,14 @@ export class OrderPrismaRepository implements OrderRepository{
         return plainToInstance(Order, userOrders)
     }
 
-    async update(id: string, data: UpdateOrderDto): Promise<Order> {
+    async update(id: string, data: UpdateOrderDto, user: RequestUser): Promise<Order> {
         const order = await this.prisma.orders.findUnique({where:{id}})
 
         if (!order) {
             throw new HttpException('Pedido não encontrado', 404)
         }
+
+        this.isAllowed(user, order.user_id)
 
         const product = await this.prisma.products.findUnique({where: {id: order.product_id}})
 
@@ -127,13 +138,15 @@ export class OrderPrismaRepository implements OrderRepository{
         return plainToInstance(Order, updatedStatus)
     }
 
-    async delete(id: string): Promise<void> {
+    async delete(id: string, user: RequestUser): Promise<void> {
 
         const order = await this.prisma.orders.findUnique({where: {id}})
 
         if (!order) {
             throw new HttpException('Pedido não encontrado', 404)
         }
+
+        this.isAllowed(user, order.user_id)
         
         await this.prisma.orders.delete({where: {id}})
     }

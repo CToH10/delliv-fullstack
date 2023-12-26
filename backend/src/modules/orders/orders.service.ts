@@ -15,23 +15,23 @@ export class OrdersService {
     return this.orderRepository.findAll();
   }
 
-  findOne(id: string) {
-    return this.orderRepository.findOne(id);
+  findOne(id: string, user:RequestUser) {
+    return this.orderRepository.findOne(id, user);
   }
 
   findByUser(id: string) {
     return this.orderRepository.findByUser(id)
   }
 
-  update(id: string, updateOrderDto: UpdateOrderDto) {
-    return this.orderRepository.update(id, updateOrderDto);
+  update(id: string, updateOrderDto: UpdateOrderDto, user: RequestUser) {
+    return this.orderRepository.update(id, updateOrderDto, user);
   }
 
   updateStatus(id:string) {
     return this.orderRepository.updateStatus(id)
   }
 
-  remove(id: string) {
-    return this.orderRepository.delete(id)
+  remove(id: string, user: RequestUser) {
+    return this.orderRepository.delete(id, user)
   }
 }
