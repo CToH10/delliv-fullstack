@@ -53,6 +53,18 @@ export class OrderPrismaRepository implements OrderRepository{
         return plainToInstance(Order, order)
     }
 
+    async findByUser(id: string): Promise<Order> {
+        const userOrders = await this.prisma.orders.findMany({where: {
+            user_id:id
+        }})
+
+        if (userOrders.length === 0) {
+            throw new HttpException('Usuário não possui pedidos', 404   )
+        }
+
+        return plainToInstance(Order, userOrders)
+    }
+
     async update(id: string, data: UpdateOrderDto): Promise<Order> {
         const order = await this.prisma.orders.findUnique({where:{id}})
 

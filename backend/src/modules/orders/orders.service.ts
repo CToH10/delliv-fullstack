@@ -19,6 +19,10 @@ export class OrdersService {
     return this.orderRepository.findOne(id);
   }
 
+  findByUser(id: string) {
+    return this.orderRepository.findByUser(id)
+  }
+
   update(id: string, updateOrderDto: UpdateOrderDto) {
     return this.orderRepository.update(id, updateOrderDto);
   }

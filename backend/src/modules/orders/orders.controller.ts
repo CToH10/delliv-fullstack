@@ -31,6 +31,14 @@ export class OrdersController {
     return this.ordersService.findAll();
   }
 
+  @ApiBearerAuth()
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('/user')
+  @UseGuards(JWTAuthGuard)
+  findByUser(@CurrentUser() user: RequestUser) {
+    return this.ordersService.findByUser(user.id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.ordersService.findOne(id);
@@ -40,7 +48,6 @@ export class OrdersController {
   update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
     return this.ordersService.update(id, updateOrderDto);
   }
-
 
   @ApiBearerAuth()
   @Patch(':id/status')
