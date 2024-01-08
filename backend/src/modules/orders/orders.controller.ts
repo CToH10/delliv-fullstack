@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UseInterceptors, ClassSerializerInterceptor, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UseInterceptors, ClassSerializerInterceptor, HttpCode, Query } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
@@ -29,8 +29,28 @@ export class OrdersController {
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(JWTAuthGuard, AdminGuard)
   @Get() 
-  findAll() {
-    return this.ordersService.findAll();
+  findAll(
+    @Query('address') address: string | undefined,
+    @Query('status') status: 'sorting' | 'shipping' | 'delivered' | undefined,
+    @Query('priceTotalMin') priceTotalMin: number | undefined,
+    @Query('priceTotalMax') priceTotalMax: number | undefined,
+    @Query('product') product: string | undefined,
+    @Query('priceBy') priceBy: 'asc' | 'desc' | undefined,
+    @Query('page') page: number | undefined,
+    @Query('perPage') perPage: number | undefined,
+    @Query('user_id') user_id: string | undefined,
+
+  ) {
+    return this.ordersService.findAll(
+      address,
+      status,
+      priceTotalMax,
+      priceTotalMin,
+      product,
+      priceBy,
+      page,
+      perPage,
+      user_id);
   }
 
   @ApiBearerAuth()

@@ -2,10 +2,11 @@ import { HttpException, Injectable } from "@nestjs/common";
 import { CreateOrderDto } from "../../dto/create-order.dto";
 import { UpdateOrderDto } from "../../dto/update-order.dto";
 import { Order } from "../../entities/order.entity";
-import { OrderRepository } from "../orders.repository";
+import { FindAllOrdersReturn, OrderRepository } from "../orders.repository";
 import { PrismaService } from "src/database/prisma.service";
 import { RequestUser } from "../../orders.controller";
 import { plainToInstance } from "class-transformer";
+import { Prisma } from "@prisma/client";
 
 @Injectable()
 export class OrderPrismaRepository implements OrderRepository{
@@ -44,10 +45,109 @@ export class OrderPrismaRepository implements OrderRepository{
         return plainToInstance(Order, newOrder)
     }
 
-    async findAll(): Promise<Order[]> {
-        const allOrders = await this.prisma.orders.findMany()
+    async findAll(
+        address: string | undefined,
+        status: 'sorting' | 'shipping' | 'delivered' | undefined,
+        priceTotalMax: number | undefined,
+        priceTotalMin: number | undefined,
+        product: string | undefined,
+        priceBy: 'asc' | 'desc' | undefined,
+        page: number | undefined,
+        perPage: number | undefined,
+        user_id: string | undefined,): Promise<FindAllOrdersReturn> {
+        
+        if (perPage === 0) {
+            perPage = 1;
+        }
+          
+        if (isNaN(Number(perPage))) {
+            perPage = 12;
+        }
+          
+        if (isNaN(Number(page))) {
+            page = 1;
+        }
+          
+        if (page <= 0) {
+            page = 1;
+        }
 
-        return plainToInstance(Order, allOrders);
+
+        const query: Prisma.OrdersFindManyArgs = {
+            where:{
+                address: {contains: address, mode: 'insensitive'},
+                priceTotal: {
+                    lte: priceTotalMax ? +priceTotalMax : undefined,
+                    gte: priceTotalMin ? +priceTotalMin : undefined
+                },
+                status,
+                product: {name: product},
+                user_id
+            },
+            include: {
+                product: {
+                    select: {
+                        name: true
+                    }
+                },
+                user: {
+                    select: {
+                        id: true,
+                        fullName: true,
+                        address: true
+                    }
+                }
+            },
+            orderBy: {
+                priceTotal: priceBy
+            },
+            take: +perPage,
+            skip: (+page -1) * +perPage
+        }
+
+
+
+        const [allOrders, count] = await this.prisma.$transaction([
+            this.prisma.orders.findMany(query),
+            this.prisma.orders.count({where: query.where})
+        ])
+
+        let url = `${process.env.SERVICE_URL}cars?`;
+    // eslint-disable-next-line prefer-rest-params
+    const args = [...arguments];
+    const possible = [
+      'address',
+      'status',
+      'priceTotalMax',
+      'priceTotalMin',
+      'product',
+      'priceBy',
+      'page',
+      'perPage',
+      'user_id',
+    ];
+
+    args.forEach((arg, index) => {
+      if (arg && possible[index] !== 'page' && possible[index] !== 'perPage') {
+        url = url.concat(`${possible[index]}=${arg}&`);
+      }
+    });
+
+    const returnObj = {
+      count,
+      previousPage:
+        perPage * (page - 1) === 0
+          ? null
+          : `${url}page=${Number(page) - 1}&perPage=${perPage}`,
+      nextPage:
+        count <= Number(perPage * page)
+          ? null
+          : `${url}page=${Number(page) + 1}&perPage=${perPage}`,
+      data: plainToInstance(Order, allOrders),
+    };
+
+    return returnObj;
+
     }
 
     async findOne(id: string, user: RequestUser): Promise<Order> {
