@@ -11,8 +11,26 @@ export class OrdersService {
     return this.orderRepository.create(createOrderDto, user);
   }
 
-  findAll() {
-    return this.orderRepository.findAll();
+  findAll(
+    address: string | undefined,
+    status: 'sorting' | 'shipping' | 'delivered' | undefined,
+    priceTotalMax: number | undefined,
+    priceTotalMin: number | undefined,
+    product: string | undefined,
+    priceBy: 'asc' | 'desc' | undefined,
+    page: number | undefined,
+    perPage: number | undefined,
+    user_id: string | undefined,) {
+    return this.orderRepository.findAll(
+      address,
+      status,
+      priceTotalMax,
+      priceTotalMin,
+      product,
+      priceBy,
+      page,
+      perPage,
+      user_id,);
   }
 
   findOne(id: string, user:RequestUser) {

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode, Query } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -19,8 +19,27 @@ export class ProductsController {
   }
 
   @Get()
-  findAll() {
-    return this.productsService.findAll();
+  findAll(
+    @Query('name') name: string | undefined,
+    @Query('stockMin') stockMin: number | undefined,
+    @Query('priceMin') priceMin: number | undefined,
+    @Query('priceMax') priceMax: number | undefined,
+    @Query('stockBy') stockBy: 'asc' | 'desc' | undefined,
+    @Query('priceBy') priceBy: 'asc' | 'desc' | undefined,
+    @Query('page') page: number | undefined,
+    @Query('perPage') perPage: number | undefined,
+
+  ) {
+    return this.productsService.findAll(
+      name,
+      stockMin,
+      priceMin,
+      priceMax,
+      stockBy,
+      priceBy,
+      page,
+      perPage,
+    );
   }
 
   @Get(':id')
