@@ -46,11 +46,11 @@ export class ProductPrismaRepository implements ProductRepository {
             where: {
                 name : {contains: name, mode: 'insensitive'},
                 price: {
-                    lte: priceMax ? +priceMax : priceMax,
-                    gte: priceMin ? +priceMin : priceMin
+                    lte: priceMax ? +priceMax : undefined,
+                    gte: priceMin ? +priceMin : undefined
                 },
                 stock: {
-                    gte: stockMin ? +stockMin : stockMin
+                    gte: stockMin ? +stockMin : undefined
                 }
             },
             orderBy: {

@@ -10,8 +10,25 @@ export class ProductsService {
     return this.productRepository.create(createProductDto)
   }
 
-  findAll() {
-    return this.productRepository.findAll();
+  findAll(
+    name: string | undefined,
+    stockMin: number | undefined,
+    priceMin: number | undefined,
+    priceMax: number | undefined,
+    stockBy: 'asc' | 'desc' | undefined,
+    priceBy: 'asc' | 'desc' | undefined,
+    page: number | undefined,
+    perPage: number | undefined,) {
+    return this.productRepository.findAll(
+        name,
+        stockMin,
+        priceMin,
+        priceMax,
+        stockBy,
+        priceBy,
+        page,
+        perPage,
+    );
   }
 
   findOne(id: string) {
