@@ -191,7 +191,7 @@ button:disabled {
 
   .scrollbar {
     scroll-behavior: smooth;
-    scrollbar-color: rgb(224, 11, 33) rgba(0, 0, 0, 0);
+    scrollbar-color: rgb(62, 22, 204) rgba(0, 0, 0, 0);
     scrollbar-width: thin;
   }
 

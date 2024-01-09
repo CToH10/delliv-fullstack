@@ -4,15 +4,15 @@ module.exports = {
   theme: {
     colors: {
       brand: {
-        1: "#E00B21",
-        2: "#DE482F",
-        3: "#DE672F",
-        4: "#F56460",
+        1: "#3E16CC",
+        2: "#2805F0",
+        3: "#A698FA",
+        4: "#E3DEFF",
       },
       complement: {
-        1: "#368F81",
-        2: "#07E0C0",
-        3: "#7FEBDF",
+        1: "#A4CC16",
+        2: "#C6E067",
+        3: "#777A69",
       },
       grey: {
         0: "#0B0D0D",
