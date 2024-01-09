@@ -155,11 +155,11 @@ button:disabled {
   }
 
   select {
-    @apply rounded border-2 border-grey-7 px-4 h-12  bg-grey-1 text-grey-3;
+    @apply rounded border-2 border-brand-4 px-4 h-12 font-normal text-heading7 text-grey-1 bg-grey-8;
   }
 
   select:focus {
-    @apply bg-grey-4 border-brand-1 outline-none text-grey-0;
+    @apply bg-grey-8 border-brand-1 outline-none text-grey-0;
   }
 
   .filter-section {
