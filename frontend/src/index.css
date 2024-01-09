@@ -73,7 +73,7 @@ button:disabled {
   }
 
   .btn-brand-opacity {
-    @apply border-2 bg-brand-4 text-grey-9 border-brand-2 font-semibold;
+    @apply border-2 text-brand-2 border-brand-2 font-semibold;
   }
 
   .btn-brand-opacity:hover {
@@ -221,7 +221,7 @@ button:disabled {
 
   @layer components {
     .error {
-      @apply text-alert-1 mb-3 text-body2 font-bold animate-pulse;
+      @apply text-alert-1 text-error font-semibold animate-pulse;
     }
   }
 }

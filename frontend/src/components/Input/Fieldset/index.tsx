@@ -1,7 +1,7 @@
 import React from "react";
 
 type FieldSetProps = {
-    children: React.ReactElement[]
+    children: React.ReactNode[]
 }
 
 export const FieldSet = ({children} : FieldSetProps) => {

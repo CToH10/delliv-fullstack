@@ -55,6 +55,7 @@ module.exports = {
       btnMedium: ["0.875rem", "0rem"],
       inputPlace: ["1rem", "0rem"],
       inputLabel: ["0.875rem", "1rem"],
+      error: ["0.625rem", "0.75rem"]
     },
     fontFamily: {
       inter: ["inter", "sans-serif"],

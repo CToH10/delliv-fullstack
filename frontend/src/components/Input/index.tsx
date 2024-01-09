@@ -9,11 +9,13 @@ export const Input = ({
   placeholder,
   label,
   id,
-  // register,
+  register,
   className,
   disabled,
   error,
 }: FieldProps) => {
+  console.log(error);
+  
   return (
     <FieldSet>
       <Label id={id} label={label} />
@@ -23,11 +25,11 @@ export const Input = ({
         label={label}
         id={id}
         aria-label={placeholder}
-        // register={register}
+        register={register}
         className={className ? className : ""}
         disabled={disabled ? disabled : false}
+        error={error}
       />
-      {error ? <p>{error}</p> : <></>}
     </FieldSet>
   );
 };
