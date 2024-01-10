@@ -3,7 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Field } from "../../../Input/Field";
-import { TRegister, registerSchema } from "../../../schemas/userSchemas";
+import { TRegister, registerSchema } from "../../../../schemas/userSchemas";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 

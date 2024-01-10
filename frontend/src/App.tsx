@@ -1,16 +1,22 @@
 import React from "react";
 import "./index.css";
-import { Header } from "./components/Header";
-import { RegisterForm } from "./components/Forms/User/Register";
+import { BrowserRouter } from "react-router-dom";
+import { UserProvider } from "./context/userContext";
+import { RoutesApp } from "./routes/routes";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 function App() {
   return (
-    <div className="App scrollbar">
-      <Header />
-      <div className="w-4/5 h-[160px] m-auto flex flex-col items-center justify-center mt-[505px] scrollbar">
-        <RegisterForm />
-      </div>
-    </div>
+    <>
+      <BrowserRouter>
+        <Provider store={store}>
+          <UserProvider>
+            <RoutesApp />
+          </UserProvider>
+        </Provider>
+      </BrowserRouter>
+    </>
   );
 }
 
