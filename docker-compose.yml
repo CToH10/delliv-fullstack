@@ -1,0 +1,33 @@
+services:
+
+  database:
+    image: postgres:latest
+    restart: always
+    env_file:
+      - "./backend/.env"
+    container_name: postgres_db
+    ports:
+      - "5433:5433"
+    environment:
+      - POSTGRES_USER=prisma
+      - POSTGRES_PASSWORD=prisma
+      - POSTGRES_DB=dellivDatabase
+
+  nodejs:
+    image: node:21-alpine
+    container_name: nodejs_run
+    env_file:
+      - "./backend/.env"
+    ports:
+      - "3001:3001"
+
+  nestjs:
+    image: nestjs/cli:latest
+    container_name: nestjs_app
+    depends_on:
+      - nodejs
+      - database
+    env_file:
+      - "./backend/.env"
+    ports:
+      - "3030:3030"

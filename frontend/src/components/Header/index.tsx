@@ -6,7 +6,7 @@ import { IoPerson } from "react-icons/io5";
 
 export const Header = () => {
   return (
-    <header className="flex flex-row justify-around w-full items-center h-16 border-b-2 border-brand-1 border-opacity-70  mb-24">
+    <header className="flex flex-row justify-around w-full items-center h-16 border-b-2 border-brand-1 border-opacity-70 mb-4">
       <Link
         to={"/"}
         className="text-brand-1 font-semibold text-heading4 w-2/5 hover:font-bold hover:text-heading3"

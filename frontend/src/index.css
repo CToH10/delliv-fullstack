@@ -24,7 +24,7 @@ body {
   vertical-align: baseline;
   font-family: "Inter", sans-serif;
   list-style: none;
-  background-color: #E9ECEF;
+  background-color: #e9ecef;
 }
 
 button {
@@ -191,7 +191,7 @@ button:disabled {
 
   .scrollbar {
     scroll-behavior: smooth;
-    scrollbar-color: rgb(62, 22, 204) rgba(0, 0, 0, 0);
+    scrollbar-color: rgb(62, 22, 204) #dee2e6;
     scrollbar-width: thin;
   }
 

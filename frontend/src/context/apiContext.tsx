@@ -5,6 +5,7 @@ import { AxiosResponse } from "axios";
 import { useDispatch } from "react-redux";
 import { toggleLoading } from "../store/loadingSlice";
 import { Outlet } from "react-router-dom";
+import { setProductList } from "../store/productSlice";
 
 interface ApiContextProps {
   getAllProducts: () => Promise<AxiosResponse<any, any> | undefined>;
@@ -18,9 +19,10 @@ export const ApiProvider = () => {
   const getAllProducts = async () => {
     try {
       dispatch(toggleLoading());
-      const ideas = await api.get("products");
+      const products = await (await api.get("products")).data;
+      dispatch(setProductList(products));
 
-      return ideas;
+      return products;
     } catch (error) {
       console.log(error);
     } finally {
