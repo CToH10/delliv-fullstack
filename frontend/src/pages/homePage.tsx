@@ -19,8 +19,7 @@ export const HomePage = () => {
 
   return (
     <Layout>
-      <div className="w-4/5 m-auto flex flex-col items-center justify-center gap-2 scrollbar overflow-auto">
-        {/* <h1 className="text-brand-1 text-body1 font-bold">Welcome home</h1> */}
+      <div className="w-4/5 m-auto flex flex-col items-center justify-center gap-2 scrollbar overflow-auto lg:grid lg:grid-cols-2 lg:col-span-2 lg:columns-2 lg:place-items-center lg:gap-y-12 lg:gap-x-0">
         {productList.map((product) => {
           return (
             <ProductCard
