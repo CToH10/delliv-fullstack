@@ -151,7 +151,7 @@ button:disabled {
 
   textarea:disabled,
   input:disabled {
-    @apply outline-none bg-grey-8 border-grey-7;
+    @apply outline-none bg-grey-8 border-grey-7 cursor-not-allowed;
   }
 
   select {

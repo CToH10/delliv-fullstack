@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BsCartCheckFill, BsCart } from "react-icons/bs";
-import { IoFastFoodSharp } from "react-icons/io5";
-import { IoPerson } from "react-icons/io5";
+import { IoFastFoodSharp, IoPersonAdd, IoPerson } from "react-icons/io5";
 
 export const Header = () => {
   return (
@@ -23,7 +22,8 @@ export const Header = () => {
             <BsCart />
           </li>
           <li className="text-brand-2 font-medium text-heading5 hover:text-brand-3 hover:-translate-y-1 transition">
-            <IoPerson />
+            {/* <IoPerson /> */}
+            <IoPersonAdd />
           </li>
         </ul>
       </nav>
