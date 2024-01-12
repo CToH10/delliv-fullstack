@@ -5,6 +5,7 @@ import { HomePage } from "../pages/homePage";
 import { RegisterPage } from "../pages/registerPage";
 import { ApiProvider } from "../context/apiContext";
 import { LoginPage } from "../pages/loginPage";
+import { ProfilePage } from "../pages/profilePage";
 
 export const RoutesApp = () => {
   return (
@@ -14,7 +15,7 @@ export const RoutesApp = () => {
       <Route element={<ApiProvider />}>
         <Route path="/" element={<HomePage />} />
         <Route element={<ProtectedRoutes />}>
-          {/* <Route path="/profile" element={<Profile />} /> */}
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/" />} />

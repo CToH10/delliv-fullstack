@@ -33,7 +33,7 @@ export const LoginForm = () => {
       <Field
         disabled={loading}
         label="Nome de usuário ou email"
-        placeholder="Digite seu nome de usuário ou senha"
+        placeholder="Digite seu nome de usuário ou email"
         id="identifier"
         register={register("identifier")}
         error={errors.identifier?.message}
