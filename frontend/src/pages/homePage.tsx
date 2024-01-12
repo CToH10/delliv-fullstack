@@ -26,6 +26,7 @@ export const HomePage = () => {
               name={product.name}
               id={product.id}
               price={product.price}
+              key={product.id}
             />
           );
         })}

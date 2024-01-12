@@ -4,11 +4,13 @@ import { ProtectedRoutes } from "../components/ProtectedRoutes";
 import { HomePage } from "../pages/homePage";
 import { RegisterPage } from "../pages/registerPage";
 import { ApiProvider } from "../context/apiContext";
+import { LoginPage } from "../pages/loginPage";
 
 export const RoutesApp = () => {
   return (
     <Routes>
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/login" element={<LoginPage />} />
       <Route element={<ApiProvider />}>
         <Route path="/" element={<HomePage />} />
         <Route element={<ProtectedRoutes />}>

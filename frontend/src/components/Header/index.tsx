@@ -22,8 +22,12 @@ export const Header = () => {
             <BsCart />
           </li>
           <li className="text-brand-2 font-medium text-heading5 hover:text-brand-3 hover:-translate-y-1 transition">
-            {/* <IoPerson /> */}
-            <IoPersonAdd />
+            {/* <Link to={"/profile"}>
+              <IoPerson />
+            </Link> */}
+            <Link to={"/register"}>
+              <IoPersonAdd />
+            </Link>
           </li>
         </ul>
       </nav>
