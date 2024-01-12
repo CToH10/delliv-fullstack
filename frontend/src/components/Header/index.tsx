@@ -19,7 +19,9 @@ export const Header = () => {
       <nav className="w-1/4">
         <ul className="flex flex-row justify-between">
           <li className="text-brand-2 font-medium text-heading5 hover:text-brand-3 hover:-translate-y-1 transition">
-            <IoFastFoodSharp />
+            <Link to={"/"}>
+              <IoFastFoodSharp />
+            </Link>
           </li>
           <li className="text-brand-2 font-medium text-heading5 hover:text-brand-3 hover:-translate-y-1 transition">
             {/* <BsCartCheckFill /> */}
