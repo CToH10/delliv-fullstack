@@ -6,6 +6,7 @@ import { TRegister } from "../schemas/userSchemas";
 import { toggleLoading } from "../store/loadingSlice";
 import { TLogin } from "../schemas/loginSchema";
 import { useNavigate } from "react-router-dom";
+import { setUserToken } from "../store/userSlice";
 
 interface UserProviderProps {
   children: React.ReactNode;
@@ -41,6 +42,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       const loginToken = await (await api.post("/login", data)).data.token;
 
       localStorage.setItem("user.token", loginToken);
+      dispatch(setUserToken(loginToken));
       navigate("/");
     } catch (error) {
       console.error(error);

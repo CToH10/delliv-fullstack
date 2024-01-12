@@ -2,8 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BsCartCheckFill, BsCart } from "react-icons/bs";
 import { IoFastFoodSharp, IoPersonAdd, IoPerson } from "react-icons/io5";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 export const Header = () => {
+  const userToken = useSelector((state: RootState) => state.user.token);
+
   return (
     <header className="flex flex-row justify-around w-full items-center h-16 border-b-2 border-brand-1 border-opacity-70 mb-4">
       <Link
@@ -22,12 +26,15 @@ export const Header = () => {
             <BsCart />
           </li>
           <li className="text-brand-2 font-medium text-heading5 hover:text-brand-3 hover:-translate-y-1 transition">
-            {/* <Link to={"/profile"}>
-              <IoPerson />
-            </Link> */}
-            <Link to={"/register"}>
-              <IoPersonAdd />
-            </Link>
+            {userToken ? (
+              <Link to={"/profile"}>
+                <IoPerson />
+              </Link>
+            ) : (
+              <Link to={"/register"}>
+                <IoPersonAdd />
+              </Link>
+            )}
           </li>
         </ul>
       </nav>
