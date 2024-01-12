@@ -33,7 +33,7 @@ export const Header = () => {
                 <IoPerson />
               </Link>
             ) : (
-              <Link to={"/register"}>
+              <Link to={"/login"}>
                 <IoPersonAdd />
               </Link>
             )}
