@@ -22,7 +22,6 @@ export const LoginForm = () => {
   const loading = useSelector((state: RootState) => state.loading.loading);
 
   const onSubmit = (data: TLogin) => {
-    console.log(data);
     login(data);
   };
 
