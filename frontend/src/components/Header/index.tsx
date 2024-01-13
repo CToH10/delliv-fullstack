@@ -10,10 +10,13 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { cartFullQuantity } from "../../utils/cartFullQuantity";
+import { useUserCont } from "../../context/userContext";
 
 export const Header = () => {
   const userToken = useSelector((state: RootState) => state.user.token);
   const cart = useSelector((state: RootState) => state.cart.cart);
+
+  const { logout } = useUserCont();
 
   return (
     <header className="flex items-center justify-center w-full h-16 border-b-2 border-brand-1 border-opacity-70 mb-4">
@@ -52,7 +55,14 @@ export const Header = () => {
             </li>
             {userToken && (
               <li className="text-brand-2 font-medium text-heading5 hover:text-brand-3 hover:-translate-y-1 transition">
-                <IoLogOut />
+                <button
+                  className="w-full h-full"
+                  onClick={() => {
+                    logout();
+                  }}
+                >
+                  <IoLogOut />
+                </button>
               </li>
             )}
           </ul>

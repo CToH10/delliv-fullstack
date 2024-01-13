@@ -60,6 +60,7 @@ interface UserContextProps {
   login: (data: TLogin) => Promise<void>;
   getUserInfo: (id?: string) => Promise<userProfile | undefined>;
   getUserOrders: () => Promise<any>;
+  logout: () => void;
 }
 
 export const UserContext = createContext<UserContextProps>(
@@ -124,6 +125,12 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }
   };
 
+  const logout = () => {
+    dispatch(setUserToken(null));
+    localStorage.removeItem("user.token");
+    navigate("/");
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -131,6 +138,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         login,
         getUserInfo,
         getUserOrders,
+        logout,
       }}
     >
       {children}
