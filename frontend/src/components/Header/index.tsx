@@ -24,8 +24,9 @@ export const Header = () => {
               <IoFastFoodSharp />
             </Link>
           </li>
-          <li className="text-brand-2 font-medium text-heading5 hover:text-brand-3 hover:-translate-y-1 transition">
+          <li className="text-brand-2 font-medium text-heading5 hover:text-brand-3 hover:-translate-y-1 transition relative">
             {cart.length > 0 ? <BsCartCheckFill /> : <BsCart />}
+            {cart.length > 0 && <span className="absolute -top-3 left-3 rounded-full bg-brand-4 z-10 text-heading8 px-2 py-1 font-bold">{cart.length}</span>}
           </li>
           <li className="text-brand-2 font-medium text-heading5 hover:text-brand-3 hover:-translate-y-1 transition">
             {userToken ? (
