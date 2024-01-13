@@ -19,7 +19,7 @@ export const HomePage = () => {
 
   return (
     <Layout>
-      <div className="w-4/5 m-auto flex flex-col items-center justify-center gap-2 scrollbar overflow-auto md:grid md:grid-cols-2 md:col-span-2 xl:grid-cols-3 xl:col-span-3 md:columns-2 md:place-items-center md:gap-y-12 md:gap-x-0">
+      <ul className="listStyle">
         {productList.map((product) => {
           return (
             <ProductCard
@@ -30,7 +30,7 @@ export const HomePage = () => {
             />
           );
         })}
-      </div>
+      </ul>
     </Layout>
   );
 };

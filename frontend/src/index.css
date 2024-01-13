@@ -178,8 +178,28 @@ button:disabled {
     @apply max-w-full overflow-hidden text-ellipsis text-nowrap;
   }
 
-  .address{
-    @apply border border-brand-2 border-opacity-20 px-3 py-4 rounded-xl md:rounded-none md:border-l-2 md:border-y-0 md:border-r-0
+  .address {
+    @apply border border-brand-2 border-opacity-20 px-3 py-4 rounded-xl md:rounded-none md:border-l-2 md:border-y-0 md:border-r-0;
+  }
+
+  .orderCard {
+    @apply border-2 border-grey-2 border-opacity-25 px-8 py-5 rounded-md text-brand-2 font-semibold text-heading7 flex flex-col gap-2 w-[270px] justify-center;
+  }
+
+  .orderCard:hover {
+    @apply border-grey-3 bg-opacity-5;
+  }
+
+  .orderCardSpan {
+    @apply text-brand-1;
+  }
+
+  .orderCardStatus {
+    @apply border border-grey-3 border-opacity-20 bg-grey-6 px-4 py-2 rounded-md text-heading8;
+  }
+
+  .listStyle {
+    @apply w-4/5 m-auto flex flex-col items-center justify-center gap-2 scrollbar overflow-auto md:grid md:grid-cols-2 md:col-span-2 xl:grid-cols-3 xl:col-span-3 md:columns-2 md:place-items-center md:gap-y-12 md:gap-x-0;
   }
 }
 
