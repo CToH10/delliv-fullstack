@@ -4,6 +4,7 @@ import { BsCartCheckFill, BsCart } from "react-icons/bs";
 import { IoFastFoodSharp, IoPersonAdd, IoPerson } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { cartFullQuantity } from "../../utils/cartFullQuantity";
 
 export const Header = () => {
   const userToken = useSelector((state: RootState) => state.user.token);
@@ -26,7 +27,11 @@ export const Header = () => {
           </li>
           <li className="text-brand-2 font-medium text-heading5 hover:text-brand-3 hover:-translate-y-1 transition relative">
             {cart.length > 0 ? <BsCartCheckFill /> : <BsCart />}
-            {cart.length > 0 && <span className="absolute -top-3 left-3 rounded-full bg-brand-4 z-10 text-heading8 px-2 py-1 font-bold">{cart.length}</span>}
+            {cart.length > 0 && (
+              <span className="absolute -top-3 left-3 rounded-full bg-brand-4 z-10 text-heading8 px-2 py-1 font-bold">
+                {cartFullQuantity(cart)}
+              </span>
+            )}
           </li>
           <li className="text-brand-2 font-medium text-heading5 hover:text-brand-3 hover:-translate-y-1 transition">
             {userToken ? (

@@ -1,6 +1,6 @@
 import { ProductListType, ProductType } from "../utils/@types/productType";
 
-type CartProduct = Pick<ProductType, "id" | "name" | "price"> & {
+export type CartProduct = Pick<ProductType, "id" | "name" | "price"> & {
   quantity: number;
   total: number;
 };
