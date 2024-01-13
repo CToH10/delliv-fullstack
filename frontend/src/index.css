@@ -171,7 +171,7 @@ button:disabled {
   }
 
   .infoCard {
-    @apply border-brand-1 border-2 px-6 py-4 rounded-3xl flex flex-col items-center md:flex-row justify-between gap-8 w-full max-w-[320px] md:max-w-[450px] lg:max-w-[660px] lg:justify-around text-brand-2 font-semibold;
+    @apply border-brand-1 border-2 px-6 py-4 rounded-3xl flex flex-col items-center md:flex-row justify-between gap-8 w-full max-w-[320px] md:max-w-[450px] lg:max-w-[660px] lg:justify-around text-brand-2 font-semibold bg-grey-8;
   }
 
   .textOverflow {
@@ -183,7 +183,7 @@ button:disabled {
   }
 
   .orderCard {
-    @apply border-2 border-grey-2 border-opacity-25 px-8 py-5 rounded-md text-brand-2 font-semibold text-heading7 flex flex-col gap-2 w-[270px] justify-center;
+    @apply border-2 border-grey-2 border-opacity-25 px-8 py-5 rounded-md text-brand-2 font-semibold text-heading7 flex flex-col gap-2 w-[270px] justify-center bg-grey-8;
   }
 
   .orderCard:hover {
