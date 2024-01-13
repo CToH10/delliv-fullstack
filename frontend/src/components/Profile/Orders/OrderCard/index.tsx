@@ -16,6 +16,17 @@ export const OrderCard = ({
 }: OrderCardType) => {
   let orderStatus = "Carregando";
 
+  switch (orderStatus) {
+    case "shipped":
+      orderStatus = "Enviado";
+      break;
+    case "delivered":
+      orderStatus = "Entregue";
+      break;
+    default:
+      orderStatus = "Preparando";
+  }
+
   return (
     <section className="orderCard">
       <div className="px-4">
