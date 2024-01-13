@@ -165,6 +165,8 @@ export class OrderPrismaRepository implements OrderRepository{
     async findByUser(id: string): Promise<Order> {
         const userOrders = await this.prisma.orders.findMany({where: {
             user_id:id
+        }, include: {
+            product: true
         }})
 
         if (userOrders.length === 0) {
