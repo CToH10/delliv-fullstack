@@ -7,6 +7,7 @@ import { RootState } from "../../store";
 
 export const Header = () => {
   const userToken = useSelector((state: RootState) => state.user.token);
+  const cart = useSelector((state: RootState) => state.cart.cart);
 
   return (
     <header className="flex flex-row justify-around w-full items-center h-16 border-b-2 border-brand-1 border-opacity-70 mb-4">
@@ -24,8 +25,7 @@ export const Header = () => {
             </Link>
           </li>
           <li className="text-brand-2 font-medium text-heading5 hover:text-brand-3 hover:-translate-y-1 transition">
-            {/* <BsCartCheckFill /> */}
-            <BsCart />
+            {cart.length > 0 ? <BsCartCheckFill /> : <BsCart />}
           </li>
           <li className="text-brand-2 font-medium text-heading5 hover:text-brand-3 hover:-translate-y-1 transition">
             {userToken ? (
