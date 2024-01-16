@@ -3,6 +3,7 @@ import loadingSlice from "./loadingSlice";
 import productSlice from "./productSlice";
 import userSlice from "./userSlice";
 import cartSlice from "./cartSlice";
+import modalSlice from "./modalSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     products: productSlice,
     user: userSlice,
     cart: cartSlice,
+    modal: modalSlice,
   },
 });
 

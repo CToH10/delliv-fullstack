@@ -2,6 +2,9 @@ import React from "react";
 import { Header } from "../components/Header";
 import { ModalBox } from "../components/Modal";
 import { ModalCart } from "../components/Modal/ModalCart";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+
 // import { Footer } from "../components/Footer";
 
 interface LayoutProps {
@@ -9,13 +12,17 @@ interface LayoutProps {
 }
 
 export const Layout = ({ children }: LayoutProps) => {
+  const modalOpen = useSelector((state: RootState) => state.modal.modal);
+
   return (
     <>
       <Header />
       {children}
-      <ModalBox>
-        <ModalCart/>
-      </ModalBox>
+      {modalOpen && (
+        <ModalBox>
+          <ModalCart />
+        </ModalBox>
+      )}
       {/* <Footer /> */}
     </>
   );
