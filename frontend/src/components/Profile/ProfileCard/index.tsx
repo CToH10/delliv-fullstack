@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useUserCont, userProfile } from "../../../context/userContext";
-import { IoPencilSharp } from "react-icons/io5";
+import { FaUserPen } from "react-icons/fa6";
 
 export const ProfileCard = () => {
   const { getUserInfo } = useUserCont();
@@ -32,8 +32,8 @@ export const ProfileCard = () => {
       <section className="address flex flex-col gap-2">
         <div className="flex flex-row justify-between">
           <h3 className="text-brand-1 font-extrabold">Endereço</h3>
-          <button type="button" onClick={() => console.log("edit")} className="btn-brand1 btn-small">
-            {<IoPencilSharp />}
+          <button type="button" onClick={() => console.log("edit")} className="btn-brand1 btn-small pl-[11px]">
+            {<FaUserPen />}
           </button>
         </div>
         <div>
