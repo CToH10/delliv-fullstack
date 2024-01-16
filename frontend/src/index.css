@@ -203,6 +203,14 @@ button:disabled {
   .listStyle {
     @apply w-4/5 m-auto flex flex-col items-center justify-center gap-2 scrollbar overflow-auto md:grid md:grid-cols-2 md:col-span-2 xl:grid-cols-3 xl:col-span-3 md:columns-2 md:place-items-center md:gap-y-12 md:gap-x-0;
   }
+
+  .modalBox {
+    @apply absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-grey-4 bg-opacity-75 backdrop-blur-sm h-full w-full;
+  }
+
+  .modalContent {
+    @apply border-2 rounded-md border-brand-1 px-5 py-4 w-4/5 h-4/5 relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-grey-7
+  }
 }
 
 @layer utilities {
