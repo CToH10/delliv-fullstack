@@ -25,6 +25,8 @@ body {
   font-family: "Inter", sans-serif;
   list-style: none;
   background-color: #e9ecef;
+  /* position: relative;
+  padding-bottom: 90px; */
 }
 
 button {
