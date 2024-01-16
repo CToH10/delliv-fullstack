@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { StoreTypes } from "./storeType";
 
-const initialState: StoreTypes = { loading: false };
+const initialState: StoreTypes = { loading: false, userInfo: undefined };
 
 export const loadingSlice = createSlice({
   name: "loading",
@@ -10,9 +10,13 @@ export const loadingSlice = createSlice({
     toggleLoading: (state) => {
       state.loading = !state.loading;
     },
+
+    setUserInfo: (state, info) => {
+      state.userInfo = info.payload;
+    },
   },
 });
 
-export const { toggleLoading } = loadingSlice.actions;
+export const { toggleLoading, setUserInfo } = loadingSlice.actions;
 
 export default loadingSlice.reducer;

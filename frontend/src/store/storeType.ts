@@ -1,3 +1,4 @@
+import { userProfile } from "../context/userContext";
 import { ProductListType, ProductType } from "../utils/@types/productType";
 
 export type CartProduct = Pick<ProductType, "id" | "name" | "price"> & {
@@ -5,7 +6,7 @@ export type CartProduct = Pick<ProductType, "id" | "name" | "price"> & {
   total: number;
 };
 
-export type StoreTypes = { loading: boolean };
+export type StoreTypes = { loading: boolean, userInfo:  userProfile | undefined};
 
 export type ProductStoreTypes = { productsInfo: ProductListType };
 

@@ -13,13 +13,13 @@ export const registerSchema = z
     password: z.string().min(10).regex(strongPassword, passwordMessage),
     confirmPassword: z.string().min(1),
     address: z.object({
-        cep: z.string().min(1).max(9),
-        state: z.string().min(1).max(19),
-        city: z.string().min(1).max(30),
-        street: z.string().min(1).max(50),
-        number: z.string().min(1).max(30),
-        complement: z.string().min(1).max(120).optional(),
-    })
+      cep: z.string().min(1).max(9),
+      state: z.string().min(1).max(19),
+      city: z.string().min(1).max(30),
+      street: z.string().min(1).max(50),
+      number: z.string().min(1).max(30),
+      complement: z.string().min(1).max(120).optional(),
+    }),
   })
   .superRefine(({ confirmPassword, password }, ctx) => {
     if (password !== confirmPassword) {
@@ -32,11 +32,8 @@ export const registerSchema = z
   });
 
 export const updateUserSchema = z.object({
-  password: z.optional(
-    z.string().min(10).regex(strongPassword, passwordMessage).or(z.literal(""))
-  ),
-  username: z.string().max(120).optional(),
-  fullName: z.string().max(120).min(1).optional(),
+  username: z.optional(z.string().max(120)),
+  fullName: z.optional(z.string().max(120)),
   email: z.string().max(120).email().optional(),
 });
 

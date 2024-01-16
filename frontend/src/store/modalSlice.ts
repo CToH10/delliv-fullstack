@@ -14,9 +14,13 @@ export const modalSlice = createSlice({
     closeModal: (state) => {
       state.modal = false;
     },
+    openEditUser: (state) => {
+      state.content = "editUser";
+      state.modal = true;
+    },
   },
 });
 
-export const { openCart, closeModal } = modalSlice.actions;
+export const { openCart, closeModal, openEditUser } = modalSlice.actions;
 
 export default modalSlice.reducer;

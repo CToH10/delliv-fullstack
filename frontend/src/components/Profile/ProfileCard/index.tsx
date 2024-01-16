@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useUserCont, userProfile } from "../../../context/userContext";
+import React, { useEffect } from "react";
+import { useUserCont } from "../../../context/userContext";
 import { FaUserPen } from "react-icons/fa6";
+import { useDispatch, useSelector } from "react-redux";
+import { openEditUser } from "../../../store/modalSlice";
+import { RootState } from "../../../store";
+import { setUserInfo } from "../../../store/loadingSlice";
 
 export const ProfileCard = () => {
   const { getUserInfo } = useUserCont();
-  const [userInfo, setUserInfo] = useState<userProfile | undefined>();
+  const userInfo = useSelector((state: RootState) => state.loading.userInfo);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const getData = async () => {
       const data = await getUserInfo();
-      setUserInfo(data);
+      dispatch(setUserInfo(data));
     };
 
     getData();
@@ -32,7 +38,11 @@ export const ProfileCard = () => {
       <section className="address flex flex-col gap-2">
         <div className="flex flex-row justify-between">
           <h3 className="text-brand-1 font-extrabold">Endereço</h3>
-          <button type="button" onClick={() => console.log("edit")} className="btn-brand1 btn-small pl-[11px]">
+          <button
+            type="button"
+            onClick={() => dispatch(openEditUser())}
+            className="btn-brand1 btn-small pl-[11px]"
+          >
             {<FaUserPen />}
           </button>
         </div>

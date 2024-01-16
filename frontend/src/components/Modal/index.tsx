@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../store/modalSlice";
 import { RootState } from "../../store";
 import { ModalCart } from "./ModalCart";
+import { EditUserForm } from "../Forms/User/EditUser";
 
 export const ModalBox = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,9 @@ export const ModalBox = () => {
   switch (content) {
     case "cart":
       toRender = <ModalCart />;
+      break;
+    case "editUser":
+      toRender = <EditUserForm/>;
       break;
     default:
       <></>;
