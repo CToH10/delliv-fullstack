@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ModalStoreTypes } from "./storeType";
 
-const initialState: ModalStoreTypes = { modal: false };
+const initialState: ModalStoreTypes = { modal: false, content: "" };
 
 export const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    openModal: (state) => {
+    openCart: (state) => {
+      state.content = "cart";
       state.modal = true;
     },
     closeModal: (state) => {
@@ -16,6 +17,6 @@ export const modalSlice = createSlice({
   },
 });
 
-export const { openModal, closeModal } = modalSlice.actions;
+export const { openCart, closeModal } = modalSlice.actions;
 
 export default modalSlice.reducer;

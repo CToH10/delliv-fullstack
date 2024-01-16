@@ -1,7 +1,6 @@
 import React from "react";
 import { Header } from "../components/Header";
 import { ModalBox } from "../components/Modal";
-import { ModalCart } from "../components/Modal/ModalCart";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
@@ -19,9 +18,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <Header />
       {children}
       {modalOpen && (
-        <ModalBox>
-          <ModalCart />
-        </ModalBox>
+        <ModalBox/>
       )}
       {/* <Footer /> */}
     </>

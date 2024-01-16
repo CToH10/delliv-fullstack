@@ -13,4 +13,4 @@ export type UserStoreTypes = { token: string | null };
 
 export type CartStoreTypes = { cart: CartProduct[] | [] };
 
-export type ModalStoreTypes = { modal: boolean };
+export type ModalStoreTypes = { modal: boolean, content: string };

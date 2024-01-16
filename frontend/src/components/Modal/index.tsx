@@ -1,23 +1,30 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../store/modalSlice";
+import { RootState } from "../../store";
+import { ModalCart } from "./ModalCart";
 
-interface ModalProps {
-  children: React.ReactNode;
-}
-
-export const ModalBox = ({ children }: ModalProps) => {
+export const ModalBox = () => {
   const dispatch = useDispatch();
+  const content = useSelector((state: RootState) => state.modal.content);
 
-  
+  let toRender;
+
+  switch (content) {
+    case "cart":
+      toRender = <ModalCart />;
+      break;
+    default:
+      <></>;
+  }
+
   return (
     <section
       className="modalBox"
       onClick={(e) => {
         e.target === e.currentTarget && dispatch(closeModal());
       }}
-      
     >
       <section className="modalContent">
         <button
@@ -26,7 +33,8 @@ export const ModalBox = ({ children }: ModalProps) => {
         >
           {<IoClose />}
         </button>
-        {children}
+        {toRender}
+        {/* {children} */}
       </section>
     </section>
   );

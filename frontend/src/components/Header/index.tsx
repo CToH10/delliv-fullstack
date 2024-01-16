@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { cartFullQuantity } from "../../utils/cartFullQuantity";
 import { useUserCont } from "../../context/userContext";
-import { openModal } from "../../store/modalSlice";
+import { openCart } from "../../store/modalSlice";
 
 export const Header = () => {
   const userToken = useSelector((state: RootState) => state.user.token);
@@ -37,7 +37,7 @@ export const Header = () => {
               </Link>
             </li>
             <li className="text-brand-2 font-medium text-heading5 hover:text-brand-3 hover:-translate-y-1 transition relative">
-              <button onClick={() => dispatch(openModal())}>
+              <button onClick={() => dispatch(openCart())}>
                 {cart.length > 0 ? <BsCartCheckFill /> : <BsCart />}
               </button>
               {cart.length > 0 && (
