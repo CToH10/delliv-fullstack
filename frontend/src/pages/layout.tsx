@@ -1,6 +1,7 @@
 import React from "react";
 import { Header } from "../components/Header";
 import { ModalBox } from "../components/Modal";
+import { ModalCart } from "../components/Modal/ModalCart";
 // import { Footer } from "../components/Footer";
 
 interface LayoutProps {
@@ -13,7 +14,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <Header />
       {children}
       <ModalBox>
-        <li></li>
+        <ModalCart/>
       </ModalBox>
       {/* <Footer /> */}
     </>
