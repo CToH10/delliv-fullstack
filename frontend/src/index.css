@@ -208,11 +208,11 @@ button:disabled {
     @apply absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-grey-4 bg-opacity-75 backdrop-blur-sm h-full w-full;
   }
 
-  .modalContent {
+  .modalSection {
     @apply border-2 rounded-md border-brand-1 px-5 py-4 w-4/5 h-4/5 relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-grey-7 flex flex-col items-center ;
   }
 
-  .modalCart {
+  .modalContent {
     @apply flex flex-col gap-3 items-center w-4/5 h-full border-brand-2 border-opacity-45 rounded;
   }
 }

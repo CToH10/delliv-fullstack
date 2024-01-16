@@ -35,6 +35,14 @@ export const updateUserSchema = z.object({
   username: z.optional(z.string().max(120)),
   fullName: z.optional(z.string().max(120)),
   email: z.string().max(120).email().optional(),
+  address: z.object({
+    cep: z.string().min(1).max(9).optional(),
+    state: z.string().min(1).max(19).optional(),
+    city: z.string().min(1).max(30).optional(),
+    street: z.string().min(1).max(50).optional(),
+    number: z.string().min(1).max(30).optional(),
+    complement: z.string().max(120).optional(),
+  }),
 });
 
 export type TRegister = z.infer<typeof registerSchema>;

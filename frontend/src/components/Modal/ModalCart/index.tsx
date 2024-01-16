@@ -19,7 +19,7 @@ export const ModalCart = () => {
   }
 
   return (
-    <section className="modalCart">
+    <section className="modalContent">
       <h3 className="text-brand-1 text-heading4 font-bold w-full text-center">
         Carrinho
       </h3>
@@ -69,7 +69,7 @@ export const ModalCart = () => {
           </h3>
         </>
       ) : (
-        <h3 className="text-brand-1 text-heading6">Carrinho vazio</h3>
+        <h3 className="text-brand-1 text-heading6">Carrinho vazio :(</h3>
       )}
     </section>
   );

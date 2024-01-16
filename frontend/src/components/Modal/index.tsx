@@ -5,6 +5,7 @@ import { closeModal } from "../../store/modalSlice";
 import { RootState } from "../../store";
 import { ModalCart } from "./ModalCart";
 import { EditUserForm } from "../Forms/User/EditUser";
+import { ModalEditUser } from "./ModalEditUser";
 
 export const ModalBox = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export const ModalBox = () => {
       toRender = <ModalCart />;
       break;
     case "editUser":
-      toRender = <EditUserForm/>;
+      toRender = <ModalEditUser/>
       break;
     default:
       <></>;
@@ -30,7 +31,7 @@ export const ModalBox = () => {
         e.target === e.currentTarget && dispatch(closeModal());
       }}
     >
-      <section className="modalContent">
+      <section className="modalSection">
         <button
           className="absolute top-4 right-4 btn-small btn-brand1"
           onClick={() => dispatch(closeModal())}
